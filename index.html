@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f3ed">
+  <title>Momenta — un souvenir à la fois</title>
+  <script src="i18n.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="wordmark" href="#home" aria-label="Momenta, accueil"><span class="brand-mark" aria-hidden="true">✳</span> momenta</a>
+      <div class="top-actions">
+        <button class="icon-button history-toggle" id="history-toggle" aria-label="Ouvrir l’historique" title="Historique">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.3-5.8L3.5 8.5M3.5 4.5v4h4M12 7v5l3.3 2"/></svg>
+        </button>
+        <button class="icon-button albums-toggle" id="albums-toggle" aria-label="Ouvrir les albums" title="Albums">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg>
+        </button>
+        <button class="icon-button tools-toggle" id="tools-toggle" aria-label="Ouvrir les réglages et données" title="Réglages">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Z"/><path d="m19.4 13.5 1.1.9-1.2 2.1-1.4-.5a7.8 7.8 0 0 1-1.4.8l-.3 1.5h-2.4l-.4-1.5a7.8 7.8 0 0 1-1.5-.1l-1 1.1-2-1.2.4-1.5a7.8 7.8 0 0 1-.9-1.3l-1.5-.2v-2.4l1.4-.5a7.8 7.8 0 0 1 .7-1.5l-.5-1.4 2-1.3 1.2 1a7.8 7.8 0 0 1 1.6-.2l.8-1.3 2.3.8-.1 1.5a7.8 7.8 0 0 1 1.2 1.1l1.5-.2.7 2.3-1.2.8a7.8 7.8 0 0 1 .1 1.2Z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="view access-gate-view" id="access-gate-view" aria-labelledby="access-gate-heading" hidden>
+      <p class="eyebrow" id="access-gate-eyebrow">VOS SOUVENIRS RESTENT SUR CET APPAREIL</p>
+      <div class="empty-art" aria-hidden="true"><span>✳</span><i></i><b></b></div>
+      <h1 id="access-gate-heading">Retrouvez vos photos,<br>à votre rythme.</h1>
+      <p class="empty-preview-copy" id="access-gate-copy">Momenta a besoin de votre accord pour parcourir les images de votre photothèque. Les images restent sur votre téléphone.</p>
+      <button class="primary-button empty-return" id="access-gate-action">Continuer vers mes photos</button>
+      <p class="access-gate-status" id="access-gate-status" role="status" aria-live="polite"></p>
+      <p class="prototype-caption">Vous pourrez modifier cet accès à tout moment dans les réglages Android.</p>
+    </section>
+
+    <section class="view discover-view" id="discover-view" aria-labelledby="greeting">
+      <button class="text-button collection-back" id="collection-back" type="button" hidden>← Retour à la collection</button>
+      <div class="intro-row">
+        <div><p class="eyebrow" id="today-label">VOTRE PAUSE SOUVENIR</p><h1 id="greeting">Un instant retrouvé.</h1></div>
+        <p class="session-count" id="session-count" aria-live="polite">1/5 <span>souvenirs</span></p>
+      </div>
+
+      <div class="memory-stage" id="memory-stage" aria-label="Souvenir photo">
+        <div class="photo-frame" id="photo-frame">
+          <img id="memory-image" src="assets/coast.svg" alt="Illustration d’un rivage calme au coucher du soleil">
+          <div class="photo-shade"></div>
+          <div class="photo-topline"><span class="photo-label"><span class="live-dot"></span> UN SOUVENIR POUR VOUS</span><span class="photo-number" id="photo-number">01</span><button class="photo-action" id="share-button" aria-label="Partager cette photo" title="Partager"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m0 0L8 7m4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg></button></div>
+          <div class="photo-caption"><span class="photo-date" id="photo-date">ÉTÉ 2021 · BORD DE MER</span><h2 id="photo-title">Là où le temps ralentit</h2></div>
+        </div>
+        <button class="swipe-hint" id="swipe-hint" aria-label="Photo suivante"><span>Glissez pour découvrir</span><span aria-hidden="true">↔</span></button>
+      </div>
+
+      <div class="controls-row">
+        <button class="round-control" id="previous-button" aria-label="Souvenir précédent" title="Précédent"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button>
+        <button class="note-button" id="note-button"><span class="note-icon" aria-hidden="true">✎</span><span><strong id="note-button-title">Ajouter un mot</strong><small>Commentaire et tags pour cette photo</small></span><span class="note-arrow" aria-hidden="true">↗</span></button>
+        <button class="round-control" id="next-button" aria-label="Souvenir suivant" title="Suivant"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
+      </div>
+      <div class="progress-track" role="progressbar" aria-label="Progression des souvenirs du jour" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1" id="progress-track"><span id="progress-fill"></span></div>
+      <p class="privacy-note"><span aria-hidden="true">◉</span> Vos souvenirs restent sur cet appareil.</p>
+    </section>
+
+    <section class="view history-view" id="history-view" aria-labelledby="history-heading" hidden>
+      <div class="history-heading-row"><div><p class="eyebrow">VOTRE ALBUM PERSONNEL</p><h1 id="history-heading">Souvenirs retrouvés</h1></div><button class="text-button" id="back-to-discover">← Retour</button></div>
+      <p class="history-subtitle" id="history-subtitle">Les photos que vous avez déjà redécouvertes.</p>
+      <div class="history-list" id="history-list"></div>
+      <div class="history-empty" id="history-empty" hidden><span class="empty-sparkle" aria-hidden="true">✳</span><h2>Votre album se remplit doucement.</h2><p>Les souvenirs découverts apparaîtront ici, avec vos petits mots.</p><button class="primary-button" id="empty-back">Découvrir un souvenir</button></div>
+    </section>
+
+    <section class="view albums-view" id="albums-view" aria-labelledby="albums-heading" hidden>
+      <div class="history-heading-row"><div><p class="eyebrow">VOS SOUVENIRS, PAR THÈME</p><h1 id="albums-heading">Albums</h1></div><button class="text-button" id="albums-back">← Retour</button></div>
+      <p class="history-subtitle" id="albums-subtitle">Ajoutez plusieurs tags à une photo ; chaque album correspondant se remplit automatiquement.</p>
+      <div class="album-grid" id="album-list"></div>
+      <div class="history-empty album-empty" id="album-empty" hidden><span class="empty-sparkle" aria-hidden="true">✳</span><h2>Vos albums commencent ici.</h2><p>Ajoutez un tag à un souvenir ; son album apparaîtra ici. Une photo peut rejoindre plusieurs albums.</p></div>
+      <div class="album-detail" id="album-detail" hidden>
+        <button class="text-button album-list-back" id="album-list-back">← Tous les albums</button>
+        <h2 class="album-detail-title" id="album-detail-title"></h2>
+        <div class="history-list" id="album-photo-list"></div>
+      </div>
+    </section>
+
+    <section class="view tools-view" id="tools-view" aria-labelledby="tools-heading" hidden>
+      <div class="tools-heading-row"><div><p class="eyebrow">VOTRE ESPACE, VOS RÈGLES</p><h1 id="tools-heading">Réglages & données</h1></div><button class="text-button" id="tools-back">← Retour</button></div>
+      <p class="tools-intro">Momenta garde vos souvenirs sur cet appareil. Voici les réglages qui accompagneront les prochaines étapes.</p>
+
+      <article class="settings-card language-card">
+        <div class="settings-card-heading"><span class="card-symbol" aria-hidden="true">文</span><div><p class="eyebrow" data-i18n="LANGUE / LANGUAGE">LANGUE</p><h2 data-i18n="Langue de l’application">Langue de l’application</h2></div></div>
+        <label class="reminder-time-row" for="language-select"><span data-i18n="Choisissez votre langue">Choisissez votre langue</span><select id="language-select" aria-label="Langue de l’application"><option value="fr">Français</option><option value="en">English</option></select></label>
+      </article>
+
+      <article class="settings-card access-card">
+        <div class="settings-card-heading"><span class="card-symbol" aria-hidden="true">▧</span><div><p class="eyebrow">PHOTOTHÈQUE</p><h2>Accès à vos photos</h2></div><span class="preview-pill">APERÇU</span></div>
+        <p class="settings-description" id="access-summary">Accès complet · 842 photos disponibles</p>
+        <div class="access-meter" aria-hidden="true"><span id="access-meter-fill"></span></div>
+        <div class="access-state-row" role="group" aria-label="Aperçu des états d’accès">
+          <button class="state-chip is-selected" data-access-state="full">Complet</button>
+          <button class="state-chip" data-access-state="limited">Sélectionné</button>
+          <button class="state-chip" data-access-state="denied">Refusé</button>
+          <button class="state-chip" data-access-state="empty">Vide</button>
+        </div>
+        <p class="access-explanation" id="access-explanation">Les photos restent dans votre galerie. L’application lit uniquement les images auxquelles vous lui donnez accès.</p>
+        <button class="subtle-action" id="access-action">Gérer l’accès aux photos <span aria-hidden="true">↗</span></button>
+        <button class="subtle-action refresh-gallery-action" id="refresh-photos" type="button" hidden>Actualiser la photothèque <span aria-hidden="true">↻</span></button>
+        <p class="refresh-status" id="refresh-status" role="status" aria-live="polite" hidden></p>
+        <button class="empty-preview-link" id="empty-state-preview">Voir l’écran sans photo <span aria-hidden="true">↗</span></button>
+      </article>
+
+      <article class="settings-card reminder-card" aria-labelledby="reminder-heading">
+        <div class="settings-card-heading"><span class="card-symbol" aria-hidden="true">◷</span><div><p class="eyebrow">UNE PAUSE, À VOTRE RYTHME</p><h2 id="reminder-heading">Souvenir du jour</h2></div></div>
+        <p class="settings-description">Recevez au plus un rappel par jour, à l’heure choisie. Vous pouvez le couper à tout moment.</p>
+        <label class="reminder-toggle-row" for="reminder-enabled"><span><strong>Rappel quotidien</strong><small>Facultatif · notification locale</small></span><input id="reminder-enabled" type="checkbox" role="switch" aria-checked="false"></label>
+        <label class="reminder-time-row" for="reminder-time"><span>Heure du rappel</span><input id="reminder-time" type="time" value="19:00" disabled></label>
+        <p class="reminder-status" id="reminder-status" role="status" aria-live="polite">Sur Android, activez le rappel pour choisir l’heure et autoriser les notifications.</p>
+      </article>
+
+      <article class="settings-card backup-card">
+        <div class="settings-card-heading"><span class="card-symbol" aria-hidden="true">↗</span><div><p class="eyebrow">SAUVEGARDE LOCALE</p><h2>Vos notes vous suivent</h2></div></div>
+        <p class="settings-description">Exportez vos commentaires et votre historique dans un fichier lisible. Les photos originales restent dans la galerie.</p>
+        <div class="backup-actions">
+          <button class="backup-action" id="export-preview"><span class="backup-icon" aria-hidden="true">↓</span><span><strong>Exporter mes données</strong><small>Fichier JSON · aperçu seulement</small></span><span class="action-arrow" aria-hidden="true">↗</span></button>
+          <button class="backup-action" id="import-preview"><span class="backup-icon" aria-hidden="true">↑</span><span><strong>Importer une sauvegarde</strong><small>Vérification avant toute fusion</small></span><span class="action-arrow" aria-hidden="true">↗</span></button>
+        </div>
+      </article>
+
+      <div class="privacy-card"><span aria-hidden="true">◉</span><p><strong>Privé par défaut.</strong> Pas de compte, pas de transfert vers un serveur, pas d’analyse de vos images.</p></div>
+      <p class="prototype-caption">Ces écrans sont une maquette. Les permissions système et les transferts ne sont pas activés.</p>
+    </section>
+
+    <section class="view empty-preview-view" id="empty-preview-view" aria-labelledby="empty-preview-heading" hidden>
+      <p class="eyebrow">APERÇU · PHOTOTHÈQUE VIDE</p>
+      <div class="empty-art" aria-hidden="true"><span>✳</span><i></i><b></b></div>
+      <h1 id="empty-preview-heading">Les souvenirs<br>prennent leur temps.</h1>
+      <p class="empty-preview-copy">Aucune photo accessible pour le moment. Vos images restent dans votre galerie ; vous pourrez vérifier l’accès quand vous le souhaitez.</p>
+      <button class="primary-button empty-return" id="empty-return">Revenir à la découverte</button>
+      <button class="empty-access-link" id="empty-access-link">Voir l’aperçu de l’accès aux photos</button>
+      <p class="prototype-caption">État visuel de démonstration · aucune permission système n’est demandée.</p>
+    </section>
+
+    <footer class="bottom-line"><span>UN PETIT VOYAGE DANS VOS IMAGES</span><span>NO. 01 — 05</span></footer>
+  </main>
+
+  <dialog class="note-dialog" id="note-dialog" aria-labelledby="note-heading">
+    <form method="dialog" id="note-form">
+      <div class="dialog-top"><span class="eyebrow">UNE PENSÉE À CONSERVER</span><button class="close-button" value="cancel" aria-label="Fermer">×</button></div>
+      <h2 id="note-heading">Qu’aimeriez-vous<br>vous rappeler ?</h2>
+      <label class="sr-only" for="note-input">Votre commentaire</label>
+      <textarea id="note-input" maxlength="280" placeholder="Une personne, un lieu, une sensation…" rows="4"></textarea>
+      <div class="tag-editor" aria-labelledby="tag-editor-label">
+        <p class="tag-editor-label" id="tag-editor-label">Tags <span>Plusieurs possibles</span></p>
+        <div class="selected-tags" id="selected-tags" aria-label="Tags de cette photo"></div>
+        <div class="tag-entry"><label class="sr-only" for="tag-input">Ajouter un tag</label><input id="tag-input" type="text" maxlength="24" placeholder="Ex. Famille, Voyage…" autocomplete="off"><button class="tag-add-button" id="add-tag-button" type="button">Ajouter</button></div>
+        <div class="tag-suggestions" id="tag-suggestions" aria-label="Suggestions de tags"></div>
+      </div>
+      <div class="dialog-bottom"><span id="character-count">0 / 280</span><button class="save-button" id="save-note" value="save">Garder ce mot <span aria-hidden="true">↗</span></button></div>
+    </form>
+  </dialog>
+
+  <dialog class="share-dialog" id="share-dialog" aria-labelledby="share-heading">
+    <div class="share-dialog-inner">
+      <div class="dialog-top"><span class="eyebrow">UN SOUVENIR À PARTAGER</span><button class="close-button" id="close-share" aria-label="Fermer">×</button></div>
+      <h2 id="share-heading">Partager ce moment</h2>
+      <div class="share-preview"><img id="share-preview-image" src="assets/coast.svg" alt=""><span><strong id="share-preview-title">Là où le temps ralentit</strong><small id="share-preview-date">ÉTÉ 2021 · BORD DE MER</small></span></div>
+      <p class="share-prompt" id="share-prompt">Choisissez où l’envoyer</p>
+      <button class="primary-button share-system-action" id="share-native-action" type="button" hidden>Choisir une application <span aria-hidden="true">↗</span></button>
+      <div class="share-targets">
+        <button class="share-target" data-target="Messages"><span class="target-icon messages-icon">•••</span><span>Messages</span></button>
+        <button class="share-target" data-target="À proximité"><span class="target-icon nearby-icon">◉</span><span>À proximité</span></button>
+        <button class="share-target" data-target="E-mail"><span class="target-icon mail-icon">✉</span><span>E-mail</span></button>
+        <button class="share-target" data-target="Autres applications"><span class="target-icon more-icon">＋</span><span>Autres</span></button>
+      </div>
+      <p class="share-footnote" id="share-footnote">Aucune photo ne sera envoyée dans cet aperçu.</p>
+    </div>
+  </dialog>
+
+  <div class="toast" id="prototype-toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
